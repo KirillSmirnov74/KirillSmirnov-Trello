@@ -1,0 +1,177 @@
+
+@use './variables.scss' as *;
+
+.modal {
+    &__todo {
+        background: $modal-bg;
+        border-radius: $modal-radius;
+        box-shadow: $modal-shadow;
+        padding: $modal-padding;
+        width: $modal-width;
+        max-width: 90vw;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: $modal-z-index;
+        animation: modalAppear 0.3s ease-out;
+        display: none;
+
+        &.show {
+          display: block;
+        }
+    }
+
+    &__header {
+      display: flex;
+    }
+
+  &__title {
+        margin: 0 0 30px;
+        font-size: 26px;
+        font-weight: 700;
+        color: #2d3748;
+        text-align: center;
+        letter-spacing: -0.2px;
+  }
+
+  &__input {
+        padding: 19px;
+        border: 1px solid $input-border;
+        border-radius: 10px;
+        font-size: 20px;
+        transition: all 0.2s ease;
+        background-color: #fafafa;
+        width: 100%;
+        margin-bottom: 30px;
+
+
+        &:focus {
+            border-color: $input-focus-border;
+            outline: none;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px $input-focus-shadow;
+        }
+
+        &_description {
+            min-height: 100px;
+            resize: vertical;
+            margin-bottom: 40px;
+        }
+    }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__dropdown {
+    position: relative;
+    flex: 1;
+    max-width: 160px;
+
+    &-toggle {
+      width: 100%;
+      padding: 12px 16px;
+      background: $dropdown-bg;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.2s;
+
+      &:hover {
+        background: $dropdown-hover;
+      }
+    }
+
+    &_colorChange {
+      margin-left: auto;
+    }
+
+    
+  }
+}
+
+.modal__menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid $input-border;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 8px;
+
+
+  &.show {
+    display: block;
+  }
+
+  .dropdown-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 15px;
+
+    &:hover {
+      background: $dropdown-item-hover;
+    }
+  }
+}
+
+.modal__btns {
+  display: flex;
+  gap: 20px;
+
+  .modal__btn_cancel,
+  .modal__btn_confirm {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .modal__btn_cancel {
+    background: $btn-cancel-bg;
+    color: $btn-cancel-color;
+
+    &:hover {
+      background: $btn-cancel-hover;
+    }
+  }
+
+  .modal__btn_confirm {
+    background: $btn-confirm-bg;
+    color: white;
+
+    &:hover {
+      background: $btn-confirm-hover;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px $btn-confirm-shadow;
+    }
+  }
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+

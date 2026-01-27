@@ -1,0 +1,56 @@
+.task {
+    border-radius: 20px;
+    border: 1px solid red;
+    padding: 10px 15px;
+    width: 100%;
+    margin-bottom: 20px;
+
+    &__title {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    &__description {
+        font-size: 18px;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__user {
+        font-size: 21px;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+    }
+
+    &__btns {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 7px;
+    }
+}
+
+.btn {
+    &__task {
+     --bs-btn-padding-x: 1.5rem;
+    }
+
+    &-secondary {
+        --bs-btn-bg: #0d6efd;
+        --bs-btn-hover-color:#1a76a3;
+        --bs-btn-hover-bg: #272a87;
+        --bs-btn-active-bg: var(--bs-btn-hover-bg)
+    }
+
+}
+
+
+

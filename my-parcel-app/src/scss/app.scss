@@ -1,2 +1,7 @@
 @use './libs.scss';
-@use './header.scss'
+@use "./variables.scss";
+
+@use "./header.scss";
+@use "./kanban.scss";
+@use './task.scss';
+@use './modal.scss'
