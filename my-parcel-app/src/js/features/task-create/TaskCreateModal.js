@@ -1,4 +1,6 @@
 import { renderTaskCard } from "./renderTaskCard";
+import { SetData } from "../../utils/storage";
+
 const users = [
   { id: 1, name: 'Ivan' },
   { id: 2, name: 'Polina' },
@@ -6,6 +8,7 @@ const users = [
   { id: 4, name: 'Sergei' },
   { id: 5, name: 'Vitalii' }
 ];
+
 export class TaskCreateModal {
     constructor({
         addBtnSelector,
@@ -16,6 +19,7 @@ export class TaskCreateModal {
         formSelector,
         confirmBtnSelector,
         tasksContainerSelector,
+        initialData = []
 
     }) {
     
@@ -29,6 +33,7 @@ export class TaskCreateModal {
         this.tasksContainer = document.querySelector(tasksContainerSelector);
         this.selectedUser = null;
         this.arrayUser = users
+        this.data = Array.isArray(initialData) ? [...initialData] : [];
 
         if (!this.addBtn || !this.modal) {
             console.warn('TaskCreateModal: не найдены необходимые элементы');
@@ -83,10 +88,9 @@ export class TaskCreateModal {
         this.modalMenu.classList.remove('show')
     }
 
-    handleFormSubmit(event) {
+    handleFormSubmit(event,data) {
         event.preventDefault()
 
-        
         const now = new Date()
         const titleValue = this.form.querySelector('.modal__input_title').value.trim()
         const descriptionValue = this.form.querySelector('.modal__input_description').value.trim()
@@ -113,7 +117,8 @@ export class TaskCreateModal {
         if (cardElement && typeof this.onTaskCreated === 'function') {
             this.onTaskCreated(cardElement, todo)
         }
-        
+        this.data.push(todo)
+        SetData(this.data)
         this.closeModal()
     }
 

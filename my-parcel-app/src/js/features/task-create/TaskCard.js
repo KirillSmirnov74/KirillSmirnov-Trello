@@ -1,4 +1,4 @@
-import { TaskCreateModal } from "./TaskCreateModal";
+import { SetData } from "../../utils/storage";
 
 export class TaskCard{
     constructor({ cardElement, modalInstance }) {
@@ -12,7 +12,7 @@ export class TaskCard{
 
     initCard() {
         if (this.btnDelete) {
-            this.btnDelete.addEventListener('click', () => this.handleClickBtnDeleteCard())
+            this.btnDelete.addEventListener('click', (event) => this.handleClickBtnDeleteCard(event))
         }
 
         if(this.btnEdit) {
@@ -20,14 +20,16 @@ export class TaskCard{
         }
     }
 
-    handleClickBtnDeleteCard() {
-       this.cardElement.remove()
+    handleClickBtnDeleteCard(event) {
+   
+     const cardElement = event.target.closest('.task')
+     const cardId = cardElement.id
+     this.modal.data = this.modal.data.filter(item => item.id !== cardId)
+     SetData(this.modal.data)
+     this.cardElement.remove()
     }
 
     handleClickBtnEditCard() {
         this.modal.openModal()
     }
-      
-
-
 }
