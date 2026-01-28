@@ -1,5 +1,6 @@
 import { renderTaskCard } from "./renderTaskCard";
 import { SetData } from "../../utils/storage";
+import { UpdateHeadetTodo } from "./UpdateHeaderTodo";
 
 const users = [
   { id: 1, name: 'Ivan' },
@@ -119,6 +120,7 @@ export class TaskCreateModal {
         }
         this.data.push(todo)
         SetData(this.data)
+        UpdateHeadetTodo(this.data)
         this.closeModal()
     }
 

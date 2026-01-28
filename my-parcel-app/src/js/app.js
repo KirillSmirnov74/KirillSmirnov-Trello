@@ -3,13 +3,16 @@ import { TaskCreateModal } from './features/task-create/TaskCreateModal.js';
 import { TaskCard } from './features/task-create/TaskCard.js';
 import { GetData } from './utils/storage.js';
 import { renderTaskCard } from './features/task-create/renderTaskCard.js';
+import { UpdateHeadetTodo } from './features/task-create/UpdateHeaderTodo.js';
 
 
 
 
 document.addEventListener('DOMContentLoaded',() => {
     const tasksContainer = document.querySelector('.column__tasks')
+    const columnCountTodo = document.querySelector('.count-todo')
     const data = GetData()
+    UpdateHeadetTodo(data)
     UpdateTime()
     setInterval(UpdateTime,60000)
 
@@ -43,6 +46,7 @@ document.addEventListener('DOMContentLoaded',() => {
             });
         }
     });
+
 })
 
 

@@ -1,4 +1,5 @@
 import { SetData } from "../../utils/storage";
+import { UpdateHeadetTodo } from "./UpdateHeaderTodo";
 
 export class TaskCard{
     constructor({ cardElement, modalInstance }) {
@@ -21,12 +22,12 @@ export class TaskCard{
     }
 
     handleClickBtnDeleteCard(event) {
-   
      const cardElement = event.target.closest('.task')
      const cardId = cardElement.id
      this.modal.data = this.modal.data.filter(item => item.id !== cardId)
      SetData(this.modal.data)
      this.cardElement.remove()
+     UpdateHeadetTodo(this.modal.data)
     }
 
     handleClickBtnEditCard() {
