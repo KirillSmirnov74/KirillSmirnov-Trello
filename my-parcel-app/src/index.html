@@ -31,20 +31,31 @@
       <section class="column column_todo">
         <header class="column__header column__header_todo">
           <h2 class="column__title fw-bold">TODO:</h2>
-          <span class="column__count count-todo fw-semibold"></span>
+          <span class="column__count column__count_todo fw-semibold"></span>
         </header>
 
-        <div class="column__tasks">
-
-        </div>
-
-        <button class="btn btn btn-primary column__btn_add">Add
-          todo</button>
+        <div class=" column__tasks column__tasks_todo"></div>
+        <button class="btn btn-primary column__btn_add">Add todo</button>
       </section>
 
+      <section class="column column_in-progress">
+        <header class="column__header column__header_in-progress">
+          <h2 class="column__title fw-bold">IN PROGRESS</h2>
+          <span class=" column__count column__count_in-progress fw-semibold"></span>
+        </header>
 
+        <div class=" column__tasks column__tasks_in-progress"></div>
+      </section>
 
+      <section class="column column_done">
+        <header class="column__header column__header_done">
+          <h2 class="column__title fw-bold">DONE</h2>
+          <span class="column__count column__count_done fw-semibold"></span>
+        </header>
 
+        <div class="column__tasks column__tasks_done"></div>
+        <button class="btn btn-warning column__btn_delete fw-bold">Delete all</button>
+      </section>
     </div>
 
 
@@ -68,7 +79,7 @@
         <div class="modal__actions">
           <div class="dropdown modal__dropdown">
             <button class="modal__dropdown-toggle" type="button">
-              <span>Select user</span>
+              <span class="modal__dropdown-toggle-text">Select user</span>
               <i class="bi bi-chevron-down"></i>
             </button>
 
@@ -76,8 +87,9 @@
           </div>
 
           <div class="modal__btns">
-            <button class="modal__btn_cancel" type="button">Cancel</button>
-            <button class="modal__btn_confirm" type="submit">Confirm</button>
+            <button class="modal__btn modal__btn_clear" type="button">Clear all</button>
+            <button class="modal__btn modal__btn_cancel" type="button">Cancel</button>
+            <button class="modal__btn modal__btn_confirm" type="submit">Confirm</button>
           </div>
         </div>
       </form>
@@ -85,10 +97,21 @@
   </div>
 
 
-
-
-
-
+  <div class="modal modal__confirm" id="confirmModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Warning!</h5>
+        </div>
+        <p class="modal__info"></p>
+        <div class="modal-footer">
+          <button type="button" class="modal__btn_ok">OK</button>
+          <button type="button" class="modal__btn_cancel">Cancel</button>
+          <button type="button" class="modal__btn_confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

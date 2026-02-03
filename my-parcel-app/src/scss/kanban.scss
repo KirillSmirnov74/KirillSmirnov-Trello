@@ -1,14 +1,15 @@
+@use './variables.scss' as *;
 
 .kanban {
     padding: 20px 10px;
     display: grid;
-    grid-template-columns:  1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 25px;
     width: 100%;
 }
 
 .column {
-    
+
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -16,6 +17,15 @@
 
     &_todo {
         border: 2px solid var(--bs-gray-600);
+    }
+
+    &_in-progress {
+        border: 2px solid var(--bs-orange);
+    }
+
+    &_done {
+        border: 2px solid var(--bs-success);
+        border-bottom: none;
     }
 
 
@@ -27,20 +37,33 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 10px;
-        background-color: var(--bs-blue);
+
+        &_todo {
+            background-color: var(--bs-blue);
+        }
+
+        &_in-progress {
+            background-color: var(--bs-yellow);
+        }
+
+        &_done {
+            background-color: var(--bs-teal);
+        }
+
     }
-     
+
     &__count {
         font-size: 34px;
     }
 
-    &__tasks {
+    .column__tasks {
         flex: 1;
         overflow-y: auto;
-        padding:20px 20px;
+        padding: 20px 20px;
         display: flex;
         flex-direction: column;
         gap: 16px;
+        scroll-behavior: smooth;
 
         &::-webkit-scrollbar {
             width: 6px;
@@ -51,17 +74,37 @@
             border-radius: 3px;
         }
 
+        &::-moz-scrollbar {
+            width: 6px;
+        }
+
+        &::-moz-scrollbar-thumb {
+            background: var(--bs-gray-400);
+            border-radius: 3px;
+        }
     }
 
     &__btn_add {
-        --bs-btn-padding-y: 1rem;
-        border-radius: 20px;
-        margin-top: auto;
-        align-self: stretch;
+        @extend %kanban-btns;
+
+    }
+
+    &__btn_delete {
+        @extend %kanban-btns;
+        background-color: #ff2c2c;
+    }
+
+    .btn-warning {
+        --bs-btn-bg: #ff2c2c;
+        --bs-btn-border-color: #ff2c2c;
+        --bs-btn-hover-bg: #ff1010;
+        --bs-btn-hover-border-color: #ff1010;
+        --bs-btn-active-bg: #dd0000;
+        --bs-btn-active-border-color: #dd0000;
+        --bs-btn-color: white;
+        --bs-btn-hover-color: white;
+        --bs-btn-active-color: white;
     }
 
 
 }
-
-
-

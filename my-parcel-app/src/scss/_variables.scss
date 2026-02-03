@@ -1,4 +1,3 @@
-
 $border-color: #026AA7;
 $bg-header-color: #00C2E0;
 $text-color: #333;
@@ -10,7 +9,7 @@ $modal-bg: #ffffff;
 $modal-radius: 16px;
 $modal-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 $modal-padding: 32px;
-$modal-width: 600px;
+$modal-width: 700px;
 $modal-z-index: 1500;
 
 $input-border: #e2e8f0;
@@ -28,3 +27,28 @@ $btn-confirm-shadow: rgba(56, 161, 105, 0.3);
 $dropdown-bg: #4299e1;
 $dropdown-hover: #3182ce;
 $dropdown-item-hover: #edf2f7;
+
+%modal-btn-base {
+    font-size: 1rem;
+    color: $color-white;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+%btn-cancel {
+    background: $btn-cancel-bg;
+    color: $btn-cancel-color;
+
+    &:hover {
+        background: $btn-cancel-hover;
+    }
+}
+
+%kanban-btns {
+    --bs-btn-padding-y: 1rem;
+    border-radius: 20px;
+    margin-top: auto;
+    align-self: stretch;
+}

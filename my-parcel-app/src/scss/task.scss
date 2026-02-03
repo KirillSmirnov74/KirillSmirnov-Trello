@@ -1,17 +1,36 @@
+@use './variables.scss' as *;
+
 .task {
     border-radius: 20px;
-    border: 1px solid red;
-    padding: 10px 15px;
+    border: 1px solid var(--bs-border-color);
+    padding: 20px;
     width: 100%;
     margin-bottom: 20px;
+    background-color: #f9fafb;
+    // background: #ee8181;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-color: var(--bs-border-color-translucent);
+    }
 
     &__title {
         text-align: center;
         font-size: 24px;
+        color: #1f2937;
+        margin-bottom: 10px;
+    }
+
+    &__time {
+        color: #6b7280;
+        font-size: 17px;
     }
 
     &__description {
-        font-size: 18px;
+        font-size: 20px;
+        color: #4b5563;
+        margin-bottom: 15px;
+        word-wrap: break-word;
     }
 
     &__info {
@@ -22,6 +41,7 @@
 
     &__user {
         font-size: 21px;
+        color: #374151;
     }
 
     &__actions {
@@ -34,23 +54,103 @@
     &__btns {
         display: flex;
         flex-wrap: nowrap;
-        gap: 7px;
+        gap: 15px;
     }
 }
 
-.btn {
-    &__task {
-     --bs-btn-padding-x: 1.5rem;
+
+.btn__task_edit {
+    @extend %modal-btn-base;
+    background: #f9fafb;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    padding: 2px 20px;
+    border-radius: 7px;
+
+    &:hover {
+        background: #f3f4f6;
+        border-color: #9ca3af;
+        color: #1f2937;
     }
 
-    &-secondary {
-        --bs-btn-bg: #0d6efd;
-        --bs-btn-hover-color:#1a76a3;
-        --bs-btn-hover-bg: #272a87;
-        --bs-btn-active-bg: var(--bs-btn-hover-bg)
+    &:active {
+        background: #e5e7eb;
+    }
+}
+
+.btn__task_delete {
+    @extend %modal-btn-base;
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 0 20px;
+    border-radius: 7px;
+
+    &:hover {
+        background: #fee2e2;
+        border-color: #fca5a5;
+        color: #b91c1c;
     }
 
+    &:active {
+        background: #fecaca;
+        color: #991b1b;
+    }
 }
 
 
 
+.task .dropdown {
+    .btn-secondary {
+        background: #f9fafb;
+        color: #374151;
+        border: 1px solid #d1d5db;
+        padding: 4px 8px;
+        font-size: 1rem;
+        border-radius: 10px;
+        box-shadow: none;
+
+        &:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        &:focus,
+        &.show {
+            box-shadow: none;
+            border-color: #9ca3af;
+        }
+
+        &::after {
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+    }
+
+    .dropdown-menu {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 6px 0;
+        min-width: 140px;
+        margin-top: 5px;
+
+        .dropdown-item {
+            padding: 8px 16px;
+            color: #374151;
+            font-size: 1rem;
+
+            &:hover {
+                background: #f9fafb;
+                color: #1f2937;
+            }
+
+            &.active,
+            &:active {
+                background: #f3f4f6;
+                color: #1f2937;
+            }
+        }
+    }
+}

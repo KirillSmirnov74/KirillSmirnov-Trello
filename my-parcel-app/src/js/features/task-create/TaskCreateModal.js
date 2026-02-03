@@ -20,6 +20,9 @@ export class TaskCreateModal {
         formSelector,
         confirmBtnSelector,
         tasksContainerSelector,
+        deleteAllBtnSelector,
+        doneContSelector,
+        clearBtnSelector,
         initialData = []
 
     }) {
@@ -32,7 +35,12 @@ export class TaskCreateModal {
         this.form = document.querySelector(formSelector);
         this.btnConfirm = document.querySelector(confirmBtnSelector);
         this.tasksContainer = document.querySelector(tasksContainerSelector);
+        this.deleteAllDoneBtn = document.querySelector(deleteAllBtnSelector);
+        this.doneContainer = document.querySelector(doneContSelector);
+        this.clearBtn = document.querySelector(clearBtnSelector)
         this.selectedUser = null;
+        this.currentTaskId = null;
+        this.mode = 'create';
         this.arrayUser = users
         this.data = Array.isArray(initialData) ? [...initialData] : [];
 
@@ -56,14 +64,19 @@ export class TaskCreateModal {
         if (this.dropdownToggle && this.modalMenu) {
             this.dropdownToggle.addEventListener('click', () => {
             this.modalMenu.classList.toggle('show');
-        });
+        })
+        }
 
-      if (this.form) {
+        if (this.form) {
         this.form.addEventListener('submit',(event) => {
             this.handleFormSubmit(event)
         })
-      }
-    }
+        }
+
+        if (this.clearBtn) {
+            this.clearBtn.addEventListener('click',() => this.clearForm())
+        }
+    
     }
 
     openModal() {
@@ -79,6 +92,8 @@ export class TaskCreateModal {
             textSpan.textContent = 'Select user'
         } 
         this.selectedUser = null
+        this.mode = 'create';
+        this.currentTaskId = null;
     }
 
     openModalMenu() {
@@ -89,8 +104,16 @@ export class TaskCreateModal {
         this.modalMenu.classList.remove('show')
     }
 
-    handleFormSubmit(event,data) {
+    handleFormSubmit(event) {
         event.preventDefault()
+        if(this.mode == 'create') {
+            this.handleCreate()
+        } else {
+            this.handleEdit(event)
+        }
+    }
+
+    handleCreate() {
 
         const now = new Date()
         const titleValue = this.form.querySelector('.modal__input_title').value.trim()
@@ -104,23 +127,27 @@ export class TaskCreateModal {
             id: crypto.randomUUID(),
             title: titleValue,
             description: descriptionValue,
-            isChecked: false,
+            status: 'todo',
             timeNow: `${hours}:${minutes}`,
             assignedTo: this.selectedUser?.name || null,    
             assignedUserId: this.selectedUser?.id || null,
         }
 
-       
         this.tasksContainer.insertAdjacentHTML('beforeend',renderTaskCard(todo))
 
         const cardElement = document.getElementById(todo.id)
 
         if (cardElement && typeof this.onTaskCreated === 'function') {
             this.onTaskCreated(cardElement, todo)
-        }
+        }  
         this.data.push(todo)
         SetData(this.data)
-        UpdateHeadetTodo(this.data)
+        UpdateHeadetTodo(
+            this.data,
+            '.column__count_todo',
+            '.column__count_in-progress',
+            '.column__count_done'
+        )
         this.closeModal()
     }
 
@@ -151,5 +178,63 @@ export class TaskCreateModal {
   this.closeModalMenu();
 }
 
+handleEdit() {
+    const titleValue = this.form.querySelector('.modal__input_title').value.trim();
+    const desValue = this.form.querySelector('.modal__input_description').value.trim();
+    if (!titleValue || !desValue) return;
+
+
+    const taskIndex = this.data.findIndex(task => task.id === this.currentTaskId);
+    if (taskIndex === -1) return;
+
+    this.data[taskIndex] = {
+        ...this.data[taskIndex],
+        title: titleValue,
+        description: desValue,
+        assignedTo: this.selectedUser?.name || null,
+        assignedUserId: this.selectedUser?.id || null
+    };
+
+    SetData(this.data);
+    UpdateHeadetTodo(
+        this.data,
+        '.column__count_todo',
+        '.column__count_in-progress',
+        '.column__count_done'
+    )
+
+    if (typeof this.onTaskEdited === 'function') {
+        this.onTaskEdited(this.currentTaskId, this.data[taskIndex]);
+    }
+
+    this.closeModal();
+}  
+
+handleClickBtnDeleteAll() {
+  this.doneContainer.innerHTML = ''
+  this.data = this.data.filter(task => task.status !== 'done')
+  SetData(this.data)
+
+  UpdateHeadetTodo(
+    this.data,
+    '.column__count_todo',
+    '.column__count_in-progress',
+    '.column__count_done'
+  )
+}
+
+clearForm() {
+    const inputTitleElement = this.modal.querySelector('.modal__input_title')
+    const inputDescriptionElement = this.modal.querySelector('.modal__input_description')
+
+    if (inputTitleElement) inputTitleElement.value = ''
+    if (inputDescriptionElement) inputDescriptionElement.value = ''
+
+    this.selectedUser = null;
+    const textSpan = this.dropdownToggle?.querySelector('span');
+    if (textSpan) textSpan.textContent = 'Select user'
+
+}
+    
 }
 

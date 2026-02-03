@@ -1,70 +1,70 @@
-
 @use './variables.scss' as *;
 
 .modal {
-    &__todo {
-        background: $modal-bg;
-        border-radius: $modal-radius;
-        box-shadow: $modal-shadow;
-        padding: $modal-padding;
-        width: $modal-width;
-        max-width: 90vw;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: $modal-z-index;
-        animation: modalAppear 0.3s ease-out;
-        display: none;
+  &__todo {
+    background: $modal-bg;
+    border-radius: $modal-radius;
+    box-shadow: $modal-shadow;
+    padding: $modal-padding;
+    width: $modal-width;
+    max-width: 90vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: $modal-z-index;
+    animation: modalAppear 0.3s ease-out;
+    display: none;
 
-        &.show {
-          display: block;
-        }
+    &.show {
+      display: block;
     }
+  }
 
-    &__header {
-      display: flex;
-    }
+  &__header {
+    display: flex;
+  }
 
   &__title {
-        margin: 0 0 30px;
-        font-size: 26px;
-        font-weight: 700;
-        color: #2d3748;
-        text-align: center;
-        letter-spacing: -0.2px;
+    margin: 0 0 30px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #2d3748;
+    text-align: center;
+    letter-spacing: -0.2px;
   }
 
   &__input {
-        padding: 19px;
-        border: 1px solid $input-border;
-        border-radius: 10px;
-        font-size: 20px;
-        transition: all 0.2s ease;
-        background-color: #fafafa;
-        width: 100%;
-        margin-bottom: 30px;
+    padding: 19px;
+    border: 1px solid $input-border;
+    border-radius: 10px;
+    font-size: 20px;
+    transition: all 0.2s ease;
+    background-color: #fafafa;
+    width: 100%;
+    margin-bottom: 30px;
 
 
-        &:focus {
-            border-color: $input-focus-border;
-            outline: none;
-            background-color: #fff;
-            box-shadow: 0 0 0 3px $input-focus-shadow;
-        }
-
-        &_description {
-            min-height: 100px;
-            resize: vertical;
-            margin-bottom: 40px;
-        }
+    &:focus {
+      border-color: $input-focus-border;
+      outline: none;
+      background-color: #fff;
+      box-shadow: 0 0 0 3px $input-focus-shadow;
     }
+
+    &_description {
+      min-height: 100px;
+      resize: vertical;
+      margin-bottom: 40px;
+    }
+  }
 
   &__actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
   &__dropdown {
     position: relative;
     flex: 1;
@@ -92,7 +92,7 @@
       margin-left: auto;
     }
 
-    
+
   }
 }
 
@@ -120,7 +120,8 @@
     padding: 12px 16px;
     cursor: pointer;
     transition: background 0.15s;
-    font-size: 15px;
+    font-size: 18px;
+    text-align: center;
 
     &:hover {
       background: $dropdown-item-hover;
@@ -132,8 +133,7 @@
   display: flex;
   gap: 20px;
 
-  .modal__btn_cancel,
-  .modal__btn_confirm {
+  .modal__btn {
     padding: 12px 30px;
     border: none;
     border-radius: 10px;
@@ -143,13 +143,19 @@
     transition: all 0.2s;
   }
 
-  .modal__btn_cancel {
-    background: $btn-cancel-bg;
-    color: $btn-cancel-color;
+  .modal__btn_clear {
+    background-color: var(--bs-gray-200);
+    color: var(--bs-gray-800);
+    border: 1px solid var(--bs-gray-400);
 
     &:hover {
-      background: $btn-cancel-hover;
+      background-color: var(--bs-gray-400);
+      color: var(--bs-gray-900);
     }
+  }
+
+  .modal__btn_cancel {
+    @extend %btn-cancel;
   }
 
   .modal__btn_confirm {
@@ -169,9 +175,9 @@
     opacity: 0;
     transform: translate(-50%, -40%) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
 }
-
