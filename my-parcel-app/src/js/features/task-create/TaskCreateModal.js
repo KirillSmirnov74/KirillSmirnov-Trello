@@ -249,20 +249,17 @@ openEditModal(task) {
   this.mode = 'edit';
   this.currentTaskId = task.id;
 
-  // Заполняем поля формы
   this.form.querySelector('.modal__input_title').value = task.title;
   this.form.querySelector('.modal__input_description').value = task.description;
 
-  // Выбираем пользователя
   if (task.assignedTo) {
     this.selectedUser = { id: task.assignedUserId, name: task.assignedTo };
     const textSpan = this.dropdownToggle.querySelector('span');
     if (textSpan) textSpan.textContent = task.assignedTo;
   }
 
-  // 🔑 Устанавливаем цвет
   this.selectedColor = task.color || TASK_COLORS[0].value;
-  this.applyColor(); // обновляем фон модалки
+  this.applyColor();
 
   this.openModal();
 }
@@ -294,7 +291,6 @@ clearForm() {
     if (textSpan) textSpan.textContent = 'Select user'
 
 }
-// Генерация списка цветов
 createColorList() {
   this.colorMenu.innerHTML = '';
   TASK_COLORS.forEach(color => {
@@ -309,17 +305,14 @@ createColorList() {
   });
 }
 
-// Предпросмотр цвета
 previewColor(color) {
   this.modal.style.backgroundColor = color;
 }
 
-// Применить выбранный цвет
 applyColor() {
   this.previewColor(this.selectedColor);
 }
 
-// Обработчик выбора цвета
 chooseColor(event) {
   const button = event.target.closest('button');
   if (!button || !button.dataset.color) return;
@@ -329,7 +322,6 @@ chooseColor(event) {
   this.closeColorMenu();
 }
 
-// Открытие/закрытие меню цветов
 toggleColorMenu() {
   this.colorMenu.classList.toggle('show');
 }

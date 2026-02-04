@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded',() => {
   const card = document.getElementById(taskId);
   if (!card) return;
 
-  // Обновляем текст
   card.querySelector('.task__title').textContent = newData.title;
   card.querySelector('.task__description').textContent = newData.description;
 
@@ -65,13 +64,11 @@ document.addEventListener('DOMContentLoaded',() => {
     userEl.textContent = newData.assignedTo || 'Не назначен';
   }
 
-  // 🔑 ОБНОВЛЯЕМ ЦВЕТ ФОНА
   const bgColor = newData.color || '#f1f5f9';
   card.style.backgroundColor = bgColor;
 };
 
-    
-
+  
   const deleteAllBtn = document.querySelector('.column__btn_delete')
   deleteAllBtn?.addEventListener('click', (event) => {
   event.preventDefault()
