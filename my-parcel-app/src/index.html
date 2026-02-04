@@ -29,12 +29,12 @@
 
     <div class="kanban">
       <section class="column column_todo">
-        <header class="column__header column__header_todo">
+        <header class="column__header column__header_todo bg-blue-100">
           <h2 class="column__title fw-bold">TODO:</h2>
           <span class="column__count column__count_todo fw-semibold"></span>
         </header>
 
-        <div class=" column__tasks column__tasks_todo"></div>
+        <div class=" column__tasks column__tasks_todo bg-blue-50"></div>
         <button class="btn btn-primary column__btn_add">Add todo</button>
       </section>
 
@@ -54,7 +54,7 @@
         </header>
 
         <div class="column__tasks column__tasks_done"></div>
-        <button class="btn btn-warning column__btn_delete fw-bold">Delete all</button>
+        <button class="btn btn-warning column__btn_delete">Delete all</button>
       </section>
     </div>
 
@@ -68,9 +68,16 @@
 
   <div id="taskModal" class="modal__todo">
     <div class="modal__content">
-      <h2 class="modal__title">Create New Task</h2>
-
-
+      <div class="modal__header mb">
+        <div class="dropdown modal__dropdown_color">
+          <button class="modal__dropdown-toggle-color" type="button">
+            <span class="modal__dropdown-toggle-text">Color task</span>
+            <i class="bi bi-chevron-down"></i>
+          </button>
+          <ul class="dropdown-menu modal__menu-color"></ul>
+        </div>
+        <h2 class="modal__title">Create New Task</h2>
+      </div>
       <form id="taskForm" class="modal__form">
 
         <input class="modal__input modal__input_title" type="text" placeholder="Task title..." />
@@ -82,10 +89,8 @@
               <span class="modal__dropdown-toggle-text">Select user</span>
               <i class="bi bi-chevron-down"></i>
             </button>
-
             <ul class="dropdown-menu modal__menu"></ul>
           </div>
-
           <div class="modal__btns">
             <button class="modal__btn modal__btn_clear" type="button">Clear all</button>
             <button class="modal__btn modal__btn_cancel" type="button">Cancel</button>
@@ -112,6 +117,7 @@
       </div>
     </div>
   </div>
+
 </body>
 
 </html>

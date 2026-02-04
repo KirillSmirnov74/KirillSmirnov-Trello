@@ -52,18 +52,25 @@ document.addEventListener('DOMContentLoaded',() => {
         })
     }
 
-    taskModal.onTaskEdited = (taskId, newData) => {
-        const card = document.getElementById(taskId);
-        if (!card) return;
+   taskModal.onTaskEdited = (taskId, newData) => {
+  const card = document.getElementById(taskId);
+  if (!card) return;
 
-        card.querySelector('.task__title').textContent = newData.title;
-        card.querySelector('.task__description').textContent = newData.description;
-  
-        const userEl = card.querySelector('.task__user');
-        if (userEl) {
-        userEl.textContent = newData.assignedTo || 'Не назначен';
-        }
-    }
+  // Обновляем текст
+  card.querySelector('.task__title').textContent = newData.title;
+  card.querySelector('.task__description').textContent = newData.description;
+
+  const userEl = card.querySelector('.task__user');
+  if (userEl) {
+    userEl.textContent = newData.assignedTo || 'Не назначен';
+  }
+
+  // 🔑 ОБНОВЛЯЕМ ЦВЕТ ФОНА
+  const bgColor = newData.color || '#f1f5f9';
+  card.style.backgroundColor = bgColor;
+};
+
+    
 
   const deleteAllBtn = document.querySelector('.column__btn_delete')
   deleteAllBtn?.addEventListener('click', (event) => {

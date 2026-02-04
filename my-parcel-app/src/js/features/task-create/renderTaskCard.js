@@ -1,5 +1,6 @@
-export function renderTaskCard({ id, title, description, timeNow, assignedTo, status = 'todo' }) {
-  const userDisplay = assignedTo ?? 'Не выбран';
+export function renderTaskCard({ id, title, description, timeNow, assignedTo, status = 'todo',color = '#f1f5f9' }) {
+  const userDisplay = assignedTo ?? 'Не выбран'
+  const bgColor = color
 
   let dropdownItems = '';
   
@@ -21,7 +22,7 @@ export function renderTaskCard({ id, title, description, timeNow, assignedTo, st
   }
 
   return `
-    <div id="${id}" class="task">
+    <div id="${id}" class="task" style="background-color: ${bgColor}">
       <h3 class="task__title text-break">${title}</h3>
       <p class="task__description text-break">${description}</p>
       <div class="task__info">
