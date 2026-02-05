@@ -1,4 +1,4 @@
-export function UpdateHeadetTodo(arr,todoContSelector,inProgContSelector,doneContSelector) {
+export function UpdateHeadetTodo(arr, todoContSelector, inProgContSelector, doneContSelector) {
   const counterTodoElement = document.querySelector(todoContSelector)
   const counterInProgress = document.querySelector(inProgContSelector)
   const counterDone = document.querySelector(doneContSelector)
@@ -17,6 +17,4 @@ export function UpdateHeadetTodo(arr,todoContSelector,inProgContSelector,doneCon
     const doneCount = arr.filter(task => task.status === 'done').length
     counterDone.textContent = doneCount
   }
-
-
 }

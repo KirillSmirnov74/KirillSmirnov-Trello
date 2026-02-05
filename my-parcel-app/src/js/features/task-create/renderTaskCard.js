@@ -1,9 +1,9 @@
-export function renderTaskCard({ id, title, description, timeNow, assignedTo, status = 'todo',color = '#f1f5f9' }) {
+export function renderTaskCard({ id, title, description, timeNow, assignedTo, status = 'todo', color = '#f1f5f9' }) {
   const userDisplay = assignedTo ?? 'Не выбран'
   const bgColor = color
 
   let dropdownItems = '';
-  
+
   if (status === 'todo') {
     dropdownItems = `
       <li><a class="dropdown-item" href="#">In Progress</a></li>
