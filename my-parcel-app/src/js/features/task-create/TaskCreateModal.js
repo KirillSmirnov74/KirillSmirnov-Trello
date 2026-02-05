@@ -3,13 +3,6 @@ import { SetData } from "../../utils/storage";
 import { UpdateHeadetTodo } from "./UpdateHeaderTodo";
 import { TASK_COLORS } from "../../utils/colors";
 
-const users = [
-  { id: 1, name: 'Ivan' },
-  { id: 2, name: 'Polina' },
-  { id: 3, name: 'Alex' },
-  { id: 4, name: 'Sergei' },
-  { id: 5, name: 'Vitalii' }
-];
 
 export class TaskCreateModal {
     constructor({
@@ -42,10 +35,10 @@ export class TaskCreateModal {
         this.colorToggle = document.querySelector('.modal__dropdown-toggle-color');
         this.colorMenu = document.querySelector('.modal__menu-color');
         this.selectedColor = TASK_COLORS[0].value; // по умолчанию серый
+        this.users = []
         this.selectedUser = null;
         this.currentTaskId = null;
         this.mode = 'create';
-        this.arrayUser = users
         this.data = Array.isArray(initialData) ? [...initialData] : [];
 
         if (!this.addBtn || !this.modal) {
@@ -57,7 +50,6 @@ export class TaskCreateModal {
         }
 
         initModal() {
-        this.createlistUsers(users)
         this.addBtn.addEventListener('click', () => this.openModal());
         this.modalMenu.addEventListener('click',(event) => this.chooseUser(event))
 
@@ -107,6 +99,8 @@ export class TaskCreateModal {
         }
         })
         }
+
+        this.fetchUsers();
     
     }
 
@@ -185,24 +179,12 @@ export class TaskCreateModal {
         this.closeModal()
     }
 
-    createlistUsers(users) {
-        users.forEach(user => {
-            const li = document.createElement('li')
-            const a = document.createElement('a')
-            a.classList.add('dropdown-item')
-            a.href = '#'
-            a.textContent = user.name
-            li.append(a)
-            this.modalMenu.append(li)
-        });
-    }
-
- chooseUser(event) {
+chooseUser(event) {
   if (!event.target.classList.contains('dropdown-item')) return;
-
   event.preventDefault();
+
   const userName = event.target.textContent;
-  const userId = users.find(u => u.name === userName)?.id;
+  const userId = this.users.find(u => u.name === userName)?.id;
 
   this.selectedUser = { id: userId, name: userName };
 
@@ -328,6 +310,33 @@ toggleColorMenu() {
 
 closeColorMenu() {
   this.colorMenu.classList.remove('show');
+}
+
+createUserList(users) {
+  this.modalMenu.innerHTML = ''; 
+  users.forEach(user => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.classList.add('dropdown-item');
+    a.href = '#';
+    a.textContent = user.name;
+    li.append(a);
+    this.modalMenu.append(li);
+  });
+}
+
+async fetchUsers() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/users');
+    if (!res.ok) throw new Error('Failed to fetch users');
+    const apiUsers = await res.json();
+    this.users = apiUsers.map(u => ({ id: u.id, name: u.name }));
+    this.createUserList(this.users);
+  } catch (err) {
+    console.error('Error loading users:', err);
+    this.users = [{ id: 1, name: 'Fallback User' }];
+    this.createUserList(this.users);
+  }
 }
     
 }
