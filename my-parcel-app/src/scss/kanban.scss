@@ -1,0 +1,114 @@
+@use './variables.scss' as *;
+
+.kanban {
+    padding: 20px 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+    width: 100%;
+}
+
+.column {
+
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 840px;
+
+    &_todo {
+        background: #e0f2fe;
+    }
+
+    &_in-progress {
+        background: #fef9c3;
+    }
+
+    &_done {
+        background: #dcfce7;
+    }
+
+
+
+    &__header {
+        display: flex;
+        padding: 20px 20px;
+        border-radius: 20px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        &_todo {
+            background-color: #4b9dff;
+        }
+
+        &_in-progress {
+            background-color: #ffd230;
+        }
+
+        &_done {
+            background-color: #bbf451;
+        }
+
+    }
+
+    &__count {
+        font-size: 34px;
+    }
+
+    .column__tasks {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--bs-gray-400);
+            border-radius: 3px;
+        }
+
+        &::-moz-scrollbar {
+            width: 6px;
+        }
+
+        &::-moz-scrollbar-thumb {
+            background: var(--bs-gray-400);
+            border-radius: 3px;
+        }
+    }
+
+    &__btn_add {
+        @extend %kanban-btns;
+        background-color: #4b9dff;
+
+        &:hover {
+            background-color: #2b7fff;
+        }
+
+    }
+
+    &__btn_delete {
+        @extend %kanban-btns;
+        background-color: #fb2c36;
+        color: $color-white;
+
+        &:hover {
+            background-color: #e7000b;
+            color: $color-white;
+
+        }
+    }
+
+    .btn-warning {
+        --bs-btn-active-bg: #dd0000;
+        --bs-btn-active-color: white;
+    }
+
+
+}

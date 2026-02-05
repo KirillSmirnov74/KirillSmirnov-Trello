@@ -1,0 +1,265 @@
+@use './variables.scss' as *;
+
+.modal {
+  &__todo {
+    background: $modal-bg;
+    border-radius: $modal-radius;
+    box-shadow: $modal-shadow;
+    padding: $modal-padding;
+    width: $modal-width;
+    max-width: 90vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: $modal-z-index;
+    animation: modalAppear 0.3s ease-out;
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    margin: 0 0 30px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #2d3748;
+    text-align: center;
+    letter-spacing: -0.2px;
+    margin: 0 auto;
+  }
+
+  &__input {
+    padding: 19px;
+    border: 1px solid $input-border;
+    border-radius: 10px;
+    font-size: 20px;
+    transition: all 0.2s ease;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 30px;
+
+
+    &:focus {
+      border-color: $input-focus-border;
+      outline: none;
+      background-color: #fff;
+      box-shadow: 0 0 0 3px $input-focus-shadow;
+    }
+
+    &_description {
+      min-height: 100px;
+      resize: vertical;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__dropdown {
+    position: relative;
+    flex: 1;
+    max-width: 160px;
+
+    &-toggle {
+      width: 100%;
+      padding: 12px 16px;
+      background: $dropdown-bg;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.2s;
+
+      &:hover {
+        background: $dropdown-hover;
+      }
+    }
+
+    &_colorChange {
+      margin-left: auto;
+    }
+
+
+  }
+}
+
+.modal__menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid $input-border;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 8px;
+
+
+  &.show {
+    display: block;
+  }
+
+  .dropdown-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 18px;
+    text-align: center;
+
+    &:hover {
+      background: $dropdown-item-hover;
+    }
+  }
+}
+
+.modal__btns {
+  display: flex;
+  gap: 20px;
+
+  .modal__btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .modal__btn_clear {
+    background-color: var(--bs-gray-200);
+    color: var(--bs-gray-800);
+    border: 1px solid var(--bs-gray-400);
+
+    &:hover {
+      background-color: var(--bs-gray-400);
+      color: var(--bs-gray-900);
+    }
+  }
+
+  .modal__btn_cancel {
+    @extend %btn-cancel;
+  }
+
+  .modal__btn_confirm {
+    background: $btn-confirm-bg;
+    color: white;
+
+    &:hover {
+      background: $btn-confirm-hover;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px $btn-confirm-shadow;
+    }
+  }
+}
+
+.modal__dropdown_color {
+  position: relative;
+  display: inline-block;
+}
+
+.modal__dropdown-toggle-color {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+  }
+
+  i {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+}
+
+.modal__menu-color {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 6px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  min-width: 160px;
+  z-index: 1000;
+  list-style: none;
+  padding: 6px 0;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  button {
+    width: 100%;
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: #f9fafb;
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+      background-color: attr(data-color color);
+    }
+  }
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

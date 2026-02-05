@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parcel Vanilla App</title>
+  <link rel="stylesheet" href="scss/app.scss">
+
+  <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+  <script type="module" src="js/app.js/"></script>
+</head>
+
+<body>
+  <div class="board">
+    <header class="board__header">
+      <div class="board__info">
+        <img class="board__logo" src="./assets/logo/logo.svg">
+        <h1 class="board__title fw-bold">Trello</h1>
+      </div>
+      <time class="board__time fw-bold"></time>
+    </header>
+
+    <div class="kanban">
+      <section class="column column_todo">
+        <header class="column__header column__header_todo bg-blue-100">
+          <h2 class="column__title fw-bold">TODO:</h2>
+          <span class="column__count column__count_todo fw-semibold"></span>
+        </header>
+
+        <div class=" column__tasks column__tasks_todo bg-blue-50"></div>
+        <button class="btn btn-primary column__btn_add">Add todo</button>
+      </section>
+
+      <section class="column column_in-progress">
+        <header class="column__header column__header_in-progress">
+          <h2 class="column__title fw-bold">IN PROGRESS</h2>
+          <span class=" column__count column__count_in-progress fw-semibold"></span>
+        </header>
+
+        <div class=" column__tasks column__tasks_in-progress"></div>
+      </section>
+
+      <section class="column column_done">
+        <header class="column__header column__header_done">
+          <h2 class="column__title fw-bold">DONE</h2>
+          <span class="column__count column__count_done fw-semibold"></span>
+        </header>
+
+        <div class="column__tasks column__tasks_done"></div>
+        <button class="btn btn-warning column__btn_delete">Delete all</button>
+      </section>
+    </div>
+
+
+  </div>
+
+
+
+
+  <!-- Модальные окна -->
+
+  <div id="taskModal" class="modal__todo">
+    <div class="modal__content">
+      <div class="modal__header mb">
+        <div class="dropdown modal__dropdown_color">
+          <button class="modal__dropdown-toggle-color" type="button">
+            <span class="modal__dropdown-toggle-text">Color task</span>
+            <i class="bi bi-chevron-down"></i>
+          </button>
+          <ul class="dropdown-menu modal__menu-color"></ul>
+        </div>
+        <h2 class="modal__title">Create New Task</h2>
+      </div>
+      <form id="taskForm" class="modal__form">
+
+        <input class="modal__input modal__input_title" type="text" placeholder="Task title..." />
+        <input class="modal__input modal__input_description" type="text" placeholder="Description..." />
+
+        <div class="modal__actions">
+          <div class="dropdown modal__dropdown">
+            <button class="modal__dropdown-toggle" type="button">
+              <span class="modal__dropdown-toggle-text">Select user</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu modal__menu"></ul>
+          </div>
+          <div class="modal__btns">
+            <button class="modal__btn modal__btn_clear" type="button">Clear all</button>
+            <button class="modal__btn modal__btn_cancel" type="button">Cancel</button>
+            <button class="modal__btn modal__btn_confirm" type="submit">Confirm</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="modal modal__confirm" id="confirmModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Warning!</h5>
+        </div>
+        <p class="modal__info"></p>
+        <div class="modal-footer">
+          <button type="button" class="modal__btn_ok">OK</button>
+          <button type="button" class="modal__btn_cancel">Cancel</button>
+          <button type="button" class="modal__btn_confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+$border-color: #026AA7;
+$bg-header-color: #00C2E0;
+$text-color: #333;
+$color-white: #fff;
+
+
+// Модалки
+$modal-bg: #ffffff;
+$modal-radius: 16px;
+$modal-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+$modal-padding: 32px;
+$modal-width: 700px;
+$modal-z-index: 1500;
+
+$input-border: #e2e8f0;
+$input-focus-border: #4299e1;
+$input-focus-shadow: rgba(66, 153, 225, 0.2);
+
+$btn-cancel-bg: #e2e8f0;
+$btn-cancel-color: #4a5568;
+$btn-cancel-hover: #cbd5e0;
+
+$btn-confirm-bg: #38a169;
+$btn-confirm-hover: #2f855a;
+$btn-confirm-shadow: rgba(56, 161, 105, 0.3);
+
+$dropdown-bg: #4299e1;
+$dropdown-hover: #3182ce;
+$dropdown-item-hover: #edf2f7;
+
+%modal-btn-base {
+    font-size: 1rem;
+    color: $color-white;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+}
+
+%btn-cancel {
+    background: $btn-cancel-bg;
+    color: $btn-cancel-color;
+
+    &:hover {
+        background: $btn-cancel-hover;
+    }
+}
+
+%kanban-btns {
+    --bs-btn-padding-y: 1rem;
+    border-radius: 20px;
+    margin-top: auto;
+    align-self: stretch;
+    border: none;
+}
